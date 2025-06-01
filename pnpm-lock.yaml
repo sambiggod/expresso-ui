@@ -31,7 +31,14 @@ importers:
         specifier: ^6.3.5
         version: 6.3.5
 
-  packages/components: {}
+  packages/components:
+    devDependencies:
+      '@expresso-ui/hooks':
+        specifier: workspace:^
+        version: link:../hooks
+      '@expresso-ui/utils':
+        specifier: workspace:^
+        version: link:../utils
 
   packages/hooks: {}
 

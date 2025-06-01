@@ -1,9 +1,14 @@
 <template>
-    <button>这是一个测试的按钮</button>
+    <button>{{ props.text }}</button>
 </template>
 
-<script>
-export default {
-    name: 'ExpressoButton'
-}
+<script setup>
+import { defineProps } from 'vue'   
+
+const props = defineProps({
+    text: {
+        type: String,
+        default: 'default'
+    }
+})
 </script>

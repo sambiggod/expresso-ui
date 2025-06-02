@@ -12,6 +12,7 @@
   "dependencies": {
     "@expresso-ui/components": "workspace:^",
     "@expresso-ui/hooks": "workspace:^",
-    "@expresso-ui/utils": "workspace:^"
+    "@expresso-ui/utils": "workspace:^",
+    "@expresso-ui/theme": "workspace:^"
   }
 }

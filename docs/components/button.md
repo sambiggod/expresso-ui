@@ -1,7 +1,11 @@
 # Button
 
-## 示例
-
+## 基础按钮
+:::demo 按钮的`type` 分别为`default`、`primary`、`success`、`warning`、`danger`
+```html
+button/basis
+```
+:::
 
 ## 属性
 

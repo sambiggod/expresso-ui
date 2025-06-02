@@ -1,9 +1,11 @@
 import { defineConfig } from 'vitepress'
+import MdContainer from 'markdown-it-container'
+import path from 'path'
+import fs from 'fs'
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "My Awesome Project",
-  description: "A VitePress Site",
+  title: "业务组件库",
+  description: "A UI Library Site",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -36,5 +38,38 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
+  },
+  markdown: {
+    config: (md) => {
+      md.use(MdContainer, 'demo', {
+        render: (tokens: string, idx: string) => {
+          if (tokens[idx].nesting === 1) {
+            const info = tokens[idx].info.trim().match(/^demo\s*(.*)$/)
+            const description = info && info.length > 1 ? info[1] : ''
+
+            const nextToken = tokens[idx + 1]
+            const componentPath = nextToken.type === 'fence' ? nextToken.content : ''
+
+            let source = ''
+            if (componentPath) {
+              let file = path.resolve(__dirname, `../examples`, `${componentPath}.vue`)
+              file = file.replace(/\s+/g, '')
+              source = fs.readFileSync(file, 'utf-8')
+            }
+            console.log('componentPath: ', componentPath)
+            return `<Demo path="${componentPath.replace(/[\r\n]/g, '')}">
+              <template #source>
+                <pre v-pre><code class="language-html">${md.utils.escapeHtml(source)}</code></pre>
+              </template>
+              <template #description>
+                ${description ? `${md.render(description)}` : ''}
+              </template>
+            `
+          } else {
+            return '</Demo>'
+          }
+        }
+      })
+    }
   }
 })

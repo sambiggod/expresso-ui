@@ -2,6 +2,8 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import Demo from '../components/demo/index.vue'
 // import './highlight.scss'
+// import ExpressoUI from '@expresso-ui'
+// import '@expresso-ui/theme/theme/index.css'
 import './style.css'
 
 const theme: Theme = {

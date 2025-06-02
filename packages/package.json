@@ -1,0 +1,24 @@
+{
+  "name": "expresso-ui",
+  "version": "1.0.0",
+  "description": "UI组件库",
+  "main": "./lib/index.cjs",
+  "module": "./es/index.mjs",
+  "scripts": {
+    "build": "pnpm run build"
+  },
+  "keywords": [
+    "UI组件库",
+    "Vue3"
+  ],
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "author": "yqw",
+  "license": "ISC",
+  "dependencies": {
+    "@expresso-ui/components": "workspace:^",
+    "@expresso-ui/hooks": "workspace:^",
+    "@expresso-ui/utils": "workspace:^"
+  }
+}

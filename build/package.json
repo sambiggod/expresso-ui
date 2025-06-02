@@ -1,0 +1,27 @@
+{
+  "name": "build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "del": "^8.0.0",
+    "fast-glob": "^3.3.3",
+    "rollup": "^4.41.1",
+    "rollup-plugin-esbuild": "^6.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^6.0.1",
+    "sass": "^1.89.1"
+  }
+}

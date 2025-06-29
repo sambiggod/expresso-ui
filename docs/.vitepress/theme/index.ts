@@ -1,17 +1,19 @@
+// https://vitepress.dev/guide/custom-theme
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import Demo from '../components/demo/index.vue'
-// import './highlight.scss'
-// import ExpressoUI from '@expresso-ui'
-// import '@expresso-ui/theme/theme/index.css'
+
+import Deom from "../components/demo/index.vue"
+// UI组件库
+import UILibrary from "@expresso-ui/components"
+import "@expresso-ui/theme"
 import './style.css'
-
-const theme: Theme = {
+import './highlight.scss'
+import './iconfont/iconfont.css'
+import './table.scss'
+export default {
   extends: DefaultTheme,
-  enhanceApp({ app }) {
-    // 注册组件
-    app.component('Demo', Demo)
+  enhanceApp({ app, router, siteData }) {
+    app.component('Demo', Deom)
+    app.use(UILibrary)
   }
-}
-
-export default theme satisfies Theme
+} satisfies Theme

@@ -3,25 +3,38 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.js"
+    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
+  "sideEffects": [
+    "*.sass",
+    "*.scss",
+    "*.css"
+  ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@vitejs/plugin-vue": "^5.2.3",
-    "del": "^8.0.0",
-    "fast-glob": "^3.3.3",
-    "rollup": "^4.41.1",
-    "rollup-plugin-esbuild": "^6.2.1"
-  },
   "devDependencies": {
-    "gulp": "^5.0.1",
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.24.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "del": "^7.1.0",
+    "fast-glob": "^3.3.2",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
-    "gulp-sass": "^6.0.1",
-    "sass": "^1.89.1"
+    "gulp-sass": "^5.1.0",
+    "rollup": "^4.9.6",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.71.1"
+  },
+  "dependencies": {
+    "vite": "^5.3.1",
+    "vue": "^3.4.21"
   }
 }

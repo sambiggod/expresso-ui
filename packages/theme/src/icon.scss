@@ -1,0 +1,15 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(icon) {
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor; /* 常规css中是没有fill属性的，只在XML-CSS中存在，用于设置当前元素的填充内容，例如颜色，图片 */ 
+  font-size: inherit;
+  font-style: normal;
+  svg { width: 1em; height: 1em; }
+}

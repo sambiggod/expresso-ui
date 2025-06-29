@@ -1,13 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>example</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.js"></script>
+  <script src="../azong/dist/index.full.js"></script>
+  <link rel="stylesheet" href="../azong/dist/index.min.css">
+  <title>浏览器引用组件库包</title>
+</head>
+
+<body>
+  <div id="app">
+    <a-button type="primary" @click="show = true">{{ message }}</a-button>
+    <a-modal v-model="show">asdf</a-modal>
+    <a-form size="large">
+      <a-form-item label="23">
+        <a-input />
+      </a-form-item>
+    </a-form>
+  </div>
+  
+  <script>
+    const { createApp, ref, getCurrentInstance } = Vue
+    const App = {
+      setup() {
+        const message = ref('浏览器引用组件库包')
+        const show = ref(false)
+        const aa = getCurrentInstance()
+        aa.appContext.config.globalProperties.$message.success({
+          content: '1111'
+        })
+        console.log('Vue', aa)
+        return {
+          message,
+          show
+        }
+      },
+    }
+    console.log('AzongUI', AzongUI)
+    const app = Vue.createApp(App)
+    app.use(AzongUI)
+    app.mount('#app')
+    
+  </script>
+</body>
+
 </html>

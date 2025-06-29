@@ -1,0 +1,165 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(input) {
+  @include set-component-var('input', inputVar());
+  display: inline-flex;         // 盒模型，弹性布局
+  align-items: center;          // 子元素垂直居中
+  width: 100%;
+  &:hover {
+    #{getVarName('input', 'border-color')}: var(#{getVarName('border-color', 'hover')});
+  }
+  @include s((focus)) {
+    #{getVarName('input', 'border-color')}: var(#{getVarName('color', 'primary')});
+  }
+  @include s((disabled)) {
+    #{getVarName('input', 'border-color')}: var(#{getVarName('border-color', 'disabled')});
+    #{getVarName('input', 'bg-color')}: var(#{getVarName('color', 'disabled-bg')});
+    #{getVarName('input', 'text-color')}: var(#{getVarName('text-color', 'placeholder')});
+    #{getVarName('input', 'text-color-aside')}: var(#{getVarName('text-color', 'placeholder')});
+  }
+  @include e(wrapper) {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(#{getVarName('input', 'padding')});
+    height: var(#{getVarName('input', 'size')});                 // 高度
+    width: 100%;                  // 宽度
+    border: 2px solid var(#{getVarName('input', 'border-color')});  // 2像素，实线边框
+    border-radius: var(#{getVarName('input', 'round')});           // 圆角
+    background-color: var(#{getVarName('input', 'bg-color')});;     // 默认白色背景
+    box-sizing: border-box;       // 忽略padding和border的计算
+    transition: var(--a-transition);              // 300毫秒过渡
+    line-height: var(#{getVarName('input', 'size')});            // 行高
+    @include s(aside-prepend) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    @include s(aside-append) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  @include e(inner) {
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    color: var(#{getVarName('input', 'text-color')});
+    font-size: var(#{getVarName('input', 'font-size')});
+    @include s(color-error) {
+      #{getVarName('input', 'text-color')}: var(#{getVarName('color', 'error')});
+    }
+  }
+  @include m(size, small){
+    #{getVarName('input', 'font-size')}: var(#{getVarName('font-size', 'small')});
+    #{getVarName('input', 'size')}: var(#{getVarName('component-size', 'small')});
+    #{getVarName('input', 'round')}: var(#{getVarName('component-round', 'small')});
+  }
+  @include m(size, large){
+    #{getVarName('input', 'font-size')}: var(#{getVarName('font-size', 'large')});
+    #{getVarName('input', 'size')}: var(#{getVarName('component-size', 'large')});
+  }
+  @include s((round)) {
+    #{getVarName('input', 'round')}: var(#{getVarName('component-round', 'round')});
+  }
+  @include e(fix-wrapper) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  @include e(fix) {
+    display: flex;
+    align-items: center;
+    color: var(#{getVarName('text-color', 'placeholder')});
+    font-size: var(#{getVarName('input', 'font-size')});
+    border-radius: var(#{getVarName('input', 'round')});           // 圆角
+    box-sizing: border-box;
+    transition: var(--a-transition);
+    background-color: var(#{getVarName('input', 'bg-color')});
+    height: 100%;
+    > span {
+      color: var(#{getVarName('input', 'text-color')});
+      font-size: inherit;
+    }
+  }
+  @include e(prefix) {
+    padding-right: var(#{getVarName('input', 'padding')});
+  }
+  @include e(suffix) {
+    padding-left: var(#{getVarName('input', 'padding')});
+  }
+  @include e(fix-inner) {
+    color: var(#{getVarName('input', 'text-color')});
+    font-size: var(#{getVarName('input', 'font-size')});
+    user-select: none;
+  }
+  @include e(aside-wrapper) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(#{getVarName('input', 'size')});
+  }
+  @include e(aside) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border: 2px solid var(#{getVarName('input', 'border-color')});  // 1像素，实线边框
+    border-radius: var(#{getVarName('input', 'round')});           // 圆角
+    background-color: var(#{getVarName('input', 'bg-color-aside')});;     // 默认白色背景
+    box-sizing: border-box;       // 忽略padding和border的计算
+    padding: 0 var(#{getVarName('input', 'padding')});
+    transition: var(--a-transition);              // 300毫秒过渡
+    font-size: var(#{getVarName('input', 'font-size')});
+    user-select: none;
+    color: var(#{getVarName('input', 'text-color-aside')});
+  }
+  @include e(prepend) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    @include d(button) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: none;
+      min-width: auto;
+      padding: 0 var(#{getVarName('input', 'padding')});
+    }
+  }
+  @include e(append) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+    @include d(button) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: none;
+      min-width: auto;
+      padding: 0 var(#{getVarName('input', 'padding')});
+    }
+  }
+  @include d(button--default) {
+    color: var(#{getVarName('input', 'text-color-aside')});
+  }
+  @include d(icon) {
+    @include adn(icon) {
+      margin-left: var(#{getVarName('input', 'padding')});
+    }
+  }
+  @include e(count) {
+    font-size: 12px;
+    margin-left: var(#{getVarName('input', 'padding')});
+    line-height: 1;
+    white-space: pre;
+  }
+}
+input {
+  &::placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }                /* Chrome, Firefox, Opera, Safari 10.1+ */
+  &::-webkit-input-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }  /* WebKit browsers，webkit内核浏览器 */
+  &:-moz-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }            /* Mozilla Firefox 4 to 18 */ 
+  &::-moz-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }           /* Mozilla Firefox 19+ */ 
+  &:-ms-input-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }       /* Internet Explorer 10-11 */
+  &::-ms-input-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }      /* Microsoft Edge */
+}

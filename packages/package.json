@@ -1,24 +1,24 @@
 {
-  "name": "expresso-ui",
-  "version": "1.0.0",
-  "description": "UI组件库",
+  "name": "azong",
+  "version": "1.0.12",
+  "description": "面向高级：Vue3.4要学会的UI组件库开发，UI组件库开发，开发自己的组件库",
   "main": "./lib/index.cjs",
   "module": "./es/index.mjs",
   "scripts": {
-    "build": "pnpm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "UI组件库",
-    "Vue3"
+    "Vue",
+    "React"
   ],
   "peerDependencies": {
     "vue": "^3.4.0"
   },
-  "author": "yqw",
-  "license": "ISC",
-  "dependencies": {
-    "@expresso-ui/components": "workspace:^",
-    "@expresso-ui/hooks": "workspace:^",
-    "@expresso-ui/utils": "workspace:^"
-  }
+  "author": {
+    "name" : "A总",
+    "email" : "409019683@qq.com",
+    "url" : "http://ui.web-jshtml.cn"
+  },
+  "license": "MIT"
 }

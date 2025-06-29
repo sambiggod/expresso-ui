@@ -1,0 +1,69 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(form-item) {
+    @include set-component-var('form', formVar());
+    display: flex;
+    margin-bottom: 24px;
+    color: var(#{getVarName('text-color', 'primary')}); 
+    @include s((required)) {
+        label {
+            &:before {
+                content: '*';
+                color: var(#{getVarName('color', 'danger')});
+                margin-right: 4px;
+            }
+        }
+    }
+    @include e(label) { width: 100px; }
+    @include e(control) {
+        position: relative;
+        flex: 1;
+    }
+    @include e(control-inner) {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: var(#{getVarName('form', 'size')});
+    }
+    @include e(label-inner) {
+        display: inline-block;
+        line-height: var(#{getVarName('form', 'size')});
+        margin-right: 8px;
+        height: var(#{getVarName('form', 'size')});
+        font-size: var(#{getVarName('form', 'font-size')});
+        width: 100%;
+        white-space: nowrap;
+        text-align: right;
+        @include s((required)) {
+            &:before {
+                content: '*';
+                color: var(#{getVarName('color', 'error')});
+                margin-right: 4px;
+            }
+        }
+        @include s((colon)) {
+            margin-right: 0;
+            &:after {
+                content: ':';
+                margin: 0 8px 0 2px;
+            }
+        }
+    }
+    @include e(message) {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        font-size: 14px;
+        color: var(#{getVarName('color', 'error')});
+        padding-top: 1px;
+    }
+    
+}
+
+@each $s in $sizes {
+    @include m(size, $s){
+      #{getVarName('form', 'font-size')}: var(#{getVarName('font-size', $s)});
+      #{getVarName('form', 'size')}: var(#{getVarName('component-size', $s)});
+    }
+  }

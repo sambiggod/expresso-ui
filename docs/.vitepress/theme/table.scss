@@ -1,0 +1,27 @@
+.vp-doc {
+  > div > table {
+    display: table;
+    width: 100%;
+    border: 1px solid #f2f2f2;
+    th {
+      color: #333333;
+      font-weight: bold;
+      background-color: #fafafa;
+      padding: 12px 16px;
+      border: none;
+      border-bottom: 2px solid #f2f2f2;
+    }
+    td { 
+      border: none; 
+      max-width: 250px;
+    }
+    tr:nth-child(2n) { background-color: #fff; }
+    tr {
+      border-top: none;
+      border-bottom: 1px solid #f2f2f2;
+      &:hover {
+        background-color: #fafafa;
+      }
+    }
+  }
+}

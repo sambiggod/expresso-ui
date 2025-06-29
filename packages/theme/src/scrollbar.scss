@@ -1,0 +1,36 @@
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+}
+
+/*不支持:hover伪类的设备，移动端*/
+@media(any-hover:none) {
+  ::-webkit-scrollbar {
+      display: none;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .2);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-corner { display: none; }
+
+/*支持:hover伪类的设备，PC*/
+@media(any-hover:hover) {
+  ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, .3);
+  }
+}
+
+@media (any-pointer:none) {
+  /*不能点击的设备*/
+}
+
+@media (any-pointer:coarse) {
+  /*不能精确点击设备，移动端*/
+}
+
+@media (any-pointer:fine) {
+  /*能精确点击的设备，PC*/
+}

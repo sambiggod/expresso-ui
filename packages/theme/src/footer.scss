@@ -1,0 +1,9 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+:root {
+  --a-layout-footer-padding: 24px;
+}
+@include b(footer) {
+  display: flex;
+  padding: 0 var(--a-layout-footer-padding);
+}

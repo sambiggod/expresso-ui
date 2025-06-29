@@ -8,9 +8,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@expresso-ui/utils": "workspace:^",
-    "@expresso-ui/hooks": "workspace:^"
-  }
+  "license": "ISC"
 }

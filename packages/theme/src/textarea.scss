@@ -1,0 +1,60 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(textarea) {
+  @include set-component-var('textarea', textareaVar());
+  display: flex;         // 盒模型，弹性布局
+  position: relative;
+  &:hover {
+    #{getVarName('textarea', 'border-color')}: var(#{getVarName('border-color', 'hover')});
+  }
+  @include e(inner){
+    display: flex;
+    width: 100%;
+    border: 2px solid var(#{getVarName('textarea', 'border-color')});
+    border-radius: var(#{getVarName('textarea', 'round')});
+    background-color: var(#{getVarName('textarea', 'bg-color')});
+    align-items: center;
+    padding: 5px var(#{getVarName('textarea', 'padding')});
+    box-sizing: border-box;
+    outline: none;
+    color: var(#{getVarName('textarea', 'text-color')});
+    font-size: var(#{getVarName('textarea', 'font-size')});
+    line-height: 1.5;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 60px;
+    @include s((focus)) {
+      #{getVarName('textarea', 'border-color')}: var(#{getVarName('color', 'primary')});
+    }
+    @include s(color-danger) {
+      #{getVarName('textarea', 'text-color')}: var(#{getVarName('color', 'danger')});
+    }
+    @include s((disabled)) {
+      #{getVarName('textarea', 'border-color')}: var(#{getVarName('border-color', 'disabled')});
+      #{getVarName('textarea', 'bg-color')}: var(#{getVarName('color', 'disabled-bg')});
+      #{getVarName('textarea', 'text-color')}: var(#{getVarName('text-color', 'disabled')});
+      #{getVarName('textarea', 'text-color-aside')}: var(#{getVarName('text-color', 'placeholder')});
+      resize: none;
+    }
+  }
+  @include e(count) {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 12px;
+    font-size: 12px;
+    line-height: 1;
+    white-space: pre;
+    color: var(#{getVarName('text-color', 'disabled')});
+    background-color: #fff;
+    padding: 2px;
+  }
+}
+textarea {
+  &::placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }                /* Chrome, Firefox, Opera, Safari 10.1+ */
+  &::-webkit-input-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }  /* WebKit browsers，webkit内核浏览器 */
+  &:-moz-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }            /* Mozilla Firefox 4 to 18 */ 
+  &::-moz-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }           /* Mozilla Firefox 19+ */ 
+  &:-ms-input-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }       /* Internet Explorer 10-11 */
+  &::-ms-input-placeholder { color: var(#{getVarName('text-color', 'placeholder')}); }      /* Microsoft Edge */
+}

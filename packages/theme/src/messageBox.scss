@@ -1,0 +1,66 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(message-box) {
+  @include set-component-var('message', messageVar());
+  margin: 0 auto;
+  width: 460px;
+  box-sizing: border-box;
+  @include e(wrap) {
+    margin-top: 15vh;
+    background-color: #fff;
+    border-radius: 12px;
+  }
+  @include e(body) {
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+  @include e(footer) {
+    padding: 0 24px 16px;
+    text-align: right;
+  }
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    .a-icon {
+      font-size: 22px;
+      line-height: 1;
+      margin-right: 12px;
+      color: var(#{getVarName('messageBox', 'icon-color')});
+    }
+  }
+  @include e(title) {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(#{getVarName('neutral-color', 'light-2')});
+  }
+  @include e(content) {
+    margin: 12px 0 0 34px;
+    line-height: 24px;
+    font-size: 14px;
+    color: var(#{getVarName('neutral-color', 'light-3')});
+  }
+}
+
+@each $type in $types {
+  $className: '.a-message-box--' + $type;
+  #{$className} {
+    @include set-component-var('messageBox', messageBoxVar($type), 'type');
+  };
+}
+
+
+.a-message-box-enter-from, .a-message-box-leave-to { opacity: 0; }
+.a-message-box-enter-active .a-message-box { animation: dialogFadeIn .2s; }
+.a-message-box-leave-active .a-message-box { animation: dialogFadeOut .2s; }
+@keyframes dialogFadeIn {
+  0% { transform: translateY(-30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes dialogFadeOut {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-30px); opacity: 0; }
+}

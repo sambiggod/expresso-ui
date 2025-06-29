@@ -1,0 +1,106 @@
+@use "sass:map";
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(checkbox) {
+  @include set-component-var('checkbox', checkboxVar());
+  display: inline-flex;         // 盒模型，弹性布局
+  align-items: center;          // 子元素垂直居中
+  cursor: pointer;
+  margin-right: 24px;
+  &:hover {
+    #{getVarName('checkbox', 'border-color')}: var(#{getVarName('border-color', 'hover')});
+  }
+  @include s((checked)) {
+    #{getVarName('checkbox', 'border-color')}: var(#{getVarName('color', 'primary')});
+    #{getVarName('checkbox', 'bg-color')}: var(#{getVarName('color', 'primary')});
+    @include d(icon) { transform: scale(1); }
+  }
+  @include s((disabled)) {
+    #{getVarName('checkbox', 'border-color')}: var(#{getVarName('checkbox', 'disabled-border-color')});
+    #{getVarName('checkbox', 'bg-color')}: var(#{getVarName('checkbox', 'disabled-bg-color')});
+    #{getVarName('checkbox', 'text-color')}: var(#{getVarName('checkbox', 'disabled-text-color')});
+    #{getVarName('checkbox', 'icon-color')}: var(#{getVarName('checkbox', 'disabled-icon-color')});
+    cursor: not-allowed;
+  }
+  @include e(wrapper) {
+    position: relative;
+  }
+  @include e(input) {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 0;
+    z-index: 2;
+    height: 0;
+    width: 0;
+    cursor: pointer;
+  }
+  @include e(inner) {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(#{getVarName('checkbox', 'check-size')});
+    width: var(#{getVarName('checkbox', 'check-size')});
+    border-radius: var(#{getVarName('checkbox', 'check-round')});
+    border: 2px solid var(#{getVarName('checkbox', 'border-color')});
+    background-color: var(#{getVarName('checkbox', 'bg-color')});
+    color: var(#{getVarName('checkbox', 'icon-color')});
+    box-sizing: border-box;
+    transition: var(--a-transition);
+    @include d(icon) {
+      color: var(#{getVarName('checkbox', 'check-color')});
+      transform: scale(0);
+      transition: var(--a-transition);
+      font-size: var(#{getVarName('checkbox', 'check-icon-size')});
+    }
+    @include s((indeterminate)) { background: #fff; }
+  }
+  @include e(indeterminate) {
+    background-color: var(#{getVarName('checkbox', 'bg-color')});
+    border-radius: var(#{getVarName('checkbox', 'check-indeterminate-round')});
+    display: block;
+    width: var(#{getVarName('checkbox', 'check-indeterminate-size')});
+    height: var(#{getVarName('checkbox', 'check-indeterminate-size')});
+    box-sizing: border-box;
+    transition: var(--a-transition);
+  }
+  @include e(label) {
+    margin-left: 8px;
+    line-height: 1;
+    color: var(#{getVarName('checkbox', 'text-color')});
+    font-size: var(#{getVarName('checkbox', 'font-size')});
+  }
+  @each $s in $sizes {
+    @include m(size, $s){
+      #{getVarName('checkbox', 'font-size')}: var(#{getVarName('font-size', $s)});
+      #{getVarName('checkbox', 'size')}: var(#{getVarName('component-size', $s)});
+      #{getVarName('checkbox', 'check-size')}: var(#{getVarName('checkbox-size', $s)});
+      #{getVarName('checkbox', 'check-round')}: var(#{getVarName('checkbox-round', $s)});
+      #{getVarName('checkbox', 'check-indeterminate-size')}: var(#{getVarName('checkbox-indeterminate-size', $s)});
+      #{getVarName('checkbox', 'check-indeterminate-round')}: var(#{getVarName('checkbox-indeterminate-round', $s)});
+      @include d(icon) {
+        #{getVarName('checkbox', 'check-icon-size')}: var(#{getVarName('checkbox-icon-size', $s)});
+      }
+    }
+  }
+}
+// 主题按钮
+@each $type in $types {
+  $className: '.a-checkbox--' + $type;
+  #{$className} {
+    @include s((checked, loading)) {
+      @include set-component-var('checkbox', checkboxVar($type), 'type');
+      #{getVarName('checkbox', 'icon-color')}: var(#{getVarName('color', 'white')});
+    }
+    @include s((disabled)) {
+      #{getVarName('checkbox', 'border-color')}: var(#{getVarName('checkbox', 'disabled-border-color')});
+      #{getVarName('checkbox', 'bg-color')}: var(#{getVarName('checkbox', 'disabled-bg-color')});
+      #{getVarName('checkbox', 'text-color')}: var(#{getVarName('checkbox', 'disabled-text-color')});
+      #{getVarName('checkbox', 'text-color')}: var(#{getVarName('checkbox', 'disabled-text-color')});
+    }
+  };
+}

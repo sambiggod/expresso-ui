@@ -1,0 +1,64 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+@include b(message) {
+  @include set-component-var('message', messageVar());
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%);
+  transition: .3s;
+  padding: 0 20px;
+  z-index: 10001;
+  white-space: nowrap;
+  font-size: 14px;
+  height: 40px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .05), 0 3px 16px 0 rgba(0, 0, 0, .05);
+  background-color: #fff;
+  color: var(#{getVarName('message', 'text-color')});
+  @include e(wrap) {
+    display: flex;
+    align-items: center;
+  }
+  @include e(close) {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 -10px 0 20px;
+    opacity: .5;
+    font-size: 10px;
+  }
+  @include e(icon) {
+    display: flex;
+    align-items: center;
+    color: var(#{getVarName('message', 'icon-color')});
+    font-size: 18px;
+    @include sn-e(content) { margin-left: 10px; }
+  }
+  @include e(content) { 
+    line-height: 1;
+  }
+  @include s((border)) {
+    border: 1px solid var(#{getVarName('border-color', 'light-8')});
+    border-radius: 10px;
+    box-shadow: none;
+  }
+  @include s((background)) {
+    box-shadow: none;
+    border: none;
+    background-color: var(#{getVarName('message', 'bg-color')});
+    #{getVarName('message', 'icon-color')}: var(#{getVarName('color', 'white')});
+    color: #fff;
+  }
+}
+
+@each $type in $types {
+  $className: '.a-message--' + $type;
+  #{$className} {
+      @include set-component-var('message', messageVar($type), 'type');
+  };
+}

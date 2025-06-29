@@ -1,0 +1,10 @@
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+:root {
+  --a-layout-aside-width: 220px;
+}
+@include b(aside) {
+  display: flex;
+  transition: .3s;
+  width: var(--a-layout-aside-width);
+}

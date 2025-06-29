@@ -1,1 +1,42 @@
-.language-html {
+pre[class*=language-] {
+  background-color: #FFF;
+  margin: 0;
+  padding: 0 24px 24px;
+  border-radius: 12px;
+}
+
+.vp-doc [class*='language-'] code { padding: 0;  }
+
+.token {
+  &.attr-name,
+  &.deleted,
+  &.namespace,
+  &.tag {
+    color: #477aff
+  }
+  &.attr-value, 
+  &.char, 
+  &.regex, 
+  &.string, 
+  &.variable {
+    color: #3cc17e
+  }
+
+  &.atrule, 
+  &.builtin, 
+  &.important, 
+  &.keyword, 
+  &.selector {
+    color: #dd6c77
+  }
+
+  &.boolean, 
+  &.function, 
+  &.number {
+    color: #dda03e
+  }
+
+  &.punctuation {
+    color: #8a9bc4;
+  }
+}

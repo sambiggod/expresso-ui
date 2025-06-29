@@ -1,0 +1,55 @@
+@use "sass:map";
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+// 
+$badge-size: () !default;
+$badge-size: map.deep-merge(
+    ('small': 14px, 'default': 16px, 'large': 18px),
+    $badge-size
+);
+:root {
+  @include set-private-var('badge-dot-size', $badge-size);
+}
+@include b(badge) {
+  @include set-component-var('badge', badgeVar());
+  position: relative;
+  display: inline-flex;
+  @include adn(badge) { margin-left: 30px; }
+  @include e(content) {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 100;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    background: var(#{getVarName('badge', 'bg-color')});
+    font-size: var(#{getVarName('badge', 'font-size')});
+    color: #fff;
+    box-sizing: border-box;
+    padding: 1px 4px;
+    white-space: nowrap;
+    @include s(dot) {
+      width: var(#{getVarName('badge', 'dot')});
+      height: var(#{getVarName('badge', 'dot')});
+      padding: 0;
+    }
+  }
+  // 尺寸
+  @each $s in $sizes {
+    @include m('size', $s) {
+      #{getVarName('badge', 'font-size')}: var(#{getVarName('font-size', $s)});
+      #{getVarName('badge', 'dot')}: var(#{getVarName('badge-dot-size', $s)});
+    }
+  }
+}
+
+// 主题按钮
+@each $type in $types {
+  $className: '.a-badge--' + $type;
+  #{$className} {
+    @include set-component-var('badge', badgeVar($type), 'type');
+  };
+}

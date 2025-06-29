@@ -1,0 +1,23 @@
+@use "./common/config.scss" as *;
+.#{$namespace}-form-message-enter-active,
+.#{$namespace}-form-message-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: all .3s ease 0s;
+  transform-origin: center top;
+
+  &[data-popper-placement^='top'] {
+    transform-origin: center bottom;
+  }
+}
+.#{$namespace}-form-message-enter-from,
+.#{$namespace}-form-message-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}
+// message
+.a-message-enter-from,
+.a-message-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

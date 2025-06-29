@@ -1,4 +1,7 @@
 <template>
-    <e-button disabled>默认</e-button>
-    <e-button type="primary" disabled>主要</e-button>
+    <a-button disabled>默认</a-button>
+    <a-button type="primary" disabled>主要</a-button>
+    <a-button type="success" disabled>成功</a-button>
+    <a-button type="warning" disabled>警告</a-button>
+    <a-button type="error" disabled>错误</a-button>
 </template>

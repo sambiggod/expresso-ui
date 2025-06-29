@@ -1,0 +1,134 @@
+@use "sass:map";
+@use "./common/mixins.scss" as *;
+@use "./common/componentVar.scss" as *;
+
+// switch
+$switch-height: () !default;
+$switch-height: map.deep-merge(
+  ('small': 24px, 'default': 28px, 'large': 32px),
+  $switch-height
+);
+$switch-width: () !default;
+$switch-width: map.deep-merge(
+  ('small': 40px, 'default': 48px, 'large': 56px),
+  $switch-width
+);
+:root {
+  @include set-private-var('switch-height', $switch-height);
+  @include set-private-var('switch-width', $switch-width);
+}
+
+@include b(switch) {
+  @include set-component-var('switch', switchVar());
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  input { display: none; }
+  @include e(input) {
+    height: var(#{getVarName('switch', 'height')});
+    width: var(#{getVarName('switch', 'width')});
+    border-radius: var(#{getVarName('component-round', 'round')});
+    background-color: var(#{getVarName('switch', 'bg-color')});
+    transition: var(--a-transition);
+    @include s((loading, disabled)) {
+      #{getVarName('switch', 'bg-color')}: var(#{getVarName('switch', 'disabled-bg-color')});
+      #{getVarName('switch', 'text-color')}: var(#{getVarName('switch', 'disabled-text-color')});
+      cursor: not-allowed;
+    }
+  }
+  @include e(handel) {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: var(#{getVarName('component-round', 'round')});
+    padding: 4px;
+    box-sizing: border-box;
+  }
+  @include e(button) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 10;
+    width: calc(var(#{getVarName('switch', 'height')}) - 8px);
+    height: calc(var(#{getVarName('switch', 'height')}) - 8px);
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border-radius: var(#{getVarName('component-round', 'round')});
+    outline: none;
+    transition: var(--a-transition);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, .05);
+    font-size: var(#{getVarName('switch', 'font-size')});
+    color: var(#{getVarName('text-color', 'primary')});
+    cursor: inherit;
+    > i {
+      transform: scale(.8);
+    }
+    @include s((checked)) { left: 50%; }
+    @include s((disabled)) {
+      color: var(#{getVarName('text-color', 'disabled')});
+    }
+  }
+  @include e(inner) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: var(#{getVarName('switch', 'text-color')});
+    > span {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: var(--a-transition);
+      font-size: var(#{getVarName('switch', 'font-size')});
+      > span { line-height: 1; }
+    }
+    &.transition-scale {
+      > span { 
+        transform: scale(0);
+        @include s((checked)) {
+          transform: scale(1);
+        }
+      }
+    }
+    &.transition-slide {
+      > span:first-child { 
+        transform: translateX(-100%);
+        @include s((checked)) { 
+          transform: translateX(0%);
+          + span { transform: translateX(100%); }
+        }
+      }
+    }
+  }
+}
+
+@each $s in $sizes {
+  @include m(size, $s){
+    #{getVarName('switch', 'font-size')}: var(#{getVarName('font-size', $s)});
+    #{getVarName('switch', 'height')}: var(#{getVarName('switch-height', $s)});
+    #{getVarName('switch', 'width')}: var(#{getVarName('switch-width', $s)});
+  }
+}
+
+// 主题按钮
+@each $type in $types {
+  $className: '.a-switch--' + $type;
+  #{$className} {
+    @include s((checked)) {
+      @include set-component-var('switch', switchVar($type), 'type');
+    }
+    @include s((disabled)) {
+      #{getVarName('switch', 'bg-color')}: var(#{getVarName('switch', 'disabled-bg-color')});
+    }
+  };
+}

@@ -1,5 +1,6 @@
 import gulp from "gulp";
-import { umdBuildEntry, moduleBuildEntry, buildStyle, deletePkg, copyPackage } from "./src/index";
+import { deletePkg, umdBuildEntry, moduleBuildEntry, buildStyle, copyPackage  } from "./src/index.js"
 
-// 执行串行任务
-export default gulp.series(deletePkg, umdBuildEntry, moduleBuildEntry, buildStyle, copyPackage)
+export default gulp.series(
+  gulp.series(deletePkg, umdBuildEntry, moduleBuildEntry, buildStyle, copyPackage )
+)
